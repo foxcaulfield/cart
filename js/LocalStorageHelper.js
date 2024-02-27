@@ -16,5 +16,9 @@ export class LocalStorageHelper {
         item.push(value);
         localStorage.setItem(code, JSON.stringify(item));
     }
+
+    getItem(code) {
+        return JSON.parse(localStorage.getItem(code));
+    }
 }
 
