@@ -33,6 +33,9 @@ const options = {
 
 let userList;
 
+updateState();
+
+// Listeners
 actionAddProductButton.addEventListener("click", () => {
     const name = productName.value;
     const price = productPrice.value;
@@ -45,8 +48,7 @@ actionAddProductButton.addEventListener("click", () => {
             price: price,
             productsInStoreCount: count,
             productsInCartCount: 0,
-            discountPercentage: 0,
-            priceWithDiscount: 0
+            totalPrice: 0
         });
         updateState();
         ProductAddModal.hide();
@@ -59,9 +61,6 @@ actionAddProductButton.addEventListener("click", () => {
     }
 });
 
-updateState();
-
-// Listeners
 storeProductsList.addEventListener("click", (event) => { 
     if (event.target.classList.contains("product-delete-button")) {
 
@@ -128,7 +127,7 @@ function updateState() {
         storeProductsTable.hidden = false;
         cartProductsTable.hidden = false;
         for (let i = 0; i < products.length; ++i) { // Hello from C++
-            const { id, name, price, productsInStoreCount, productsInCartCount, discountPercentage, priceWithDiscount } = products[i];
+            const { id, name, price, productsInStoreCount, productsInCartCount, totalPrice } = products[i];
 
             // Update store table
 
@@ -181,8 +180,8 @@ function updateState() {
 
             // Update cart table
             if (productsInCartCount > 0) {
-                products[i].priceWithDiscount = productsInCartCount * price * (1 - discountPercentage * 0.01);
-                resultPrice += Number(products[i].priceWithDiscount);
+                products[i].totalPrice = productsInCartCount * price;
+                resultPrice += Number(products[i].totalPrice);
 
                 const tr = document.createElement("tr");
                 tr.classList.add("align-middle");
@@ -193,41 +192,27 @@ function updateState() {
 
                 // Product name
                 const tdProductName = document.createElement("td");
-                // tdProductName.classList.add("price_name");
                 tdProductName.innerHTML = name;
 
                 // Product price
                 const tdProductPrice = document.createElement("td");
-                // tdProductPrice.classList.add("price_one");
                 tdProductPrice.innerHTML = price;
 
                 // Product in cart count
                 const tdProductCount = document.createElement("td");
-                // tdProductCount.classList.add("price_count");
                 tdProductCount.innerHTML = productsInCartCount;
 
-                // Product discount
-                const tdProductDiscount = document.createElement("td");
-                // tdProductDiscount.classList.add("price_count");
-                const tdProductDiscountInput = document.createElement("input");
-                tdProductDiscountInput.dataset.productId = id;
-                tdProductDiscountInput.type = "text";
-                tdProductDiscountInput.value = discountPercentage;
-                tdProductDiscountInput.min = "0";
-                tdProductDiscountInput.max = "100";
-                tdProductDiscount.append(tdProductDiscountInput);
-
-                // Product price with discount
-                const tdProductPriceWithDiscount = document.createElement("td");
-                // tdProductPriceWithDiscount.classList.add("price_count");
-                tdProductPriceWithDiscount.innerHTML = products[i].priceWithDiscount;
+                // Product total price
+                const tdProductTotalPrice = document.createElement("td");
+                tdProductTotalPrice.innerHTML = products[i].totalPrice;
 
                 // Button "Delete product"
                 const tdProductDeleteButton = document.createElement("td");
                 const buttonProductDelete = document.createElement("button");
                 buttonProductDelete.classList.add("product-cancel-button", "btn", "btn-danger");
                 buttonProductDelete.dataset.productId = id;
-                buttonProductDelete.innerHTML = "&#10006;";
+                // buttonProductDelete.innerHTML = "&#10006;";
+                buttonProductDelete.innerHTML = "-1";
                 tdProductDeleteButton.append(buttonProductDelete);
 
                 tr.append(
@@ -235,10 +220,8 @@ function updateState() {
                     tdProductName,
                     tdProductPrice,
                     tdProductCount,
-                    tdProductDiscount,
-                    tdProductPriceWithDiscount,
-                    tdProductDeleteButton,
-                    // tdProductAddToCartButton
+                    tdProductTotalPrice,
+                    tdProductDeleteButton
                 )
                 cartProductsList.append(tr);
             }
