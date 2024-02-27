@@ -18,23 +18,20 @@ const productCount = document.getElementById("productCount");
 // Instances
 const IDGEN = new IdGen();
 const LS = new LocalStorageHelper();
-const ItemAddModal = new bootstrap.Modal(modalElement, {
+const ProductAddModal = new bootstrap.Modal(modalElement, {
     keyboard: false
 });
 
 // Local storage init
-if (!LS.hasItem("items")) {
-    LS.setItem("items", []);
+if (!LS.hasItem("products")) {
+    LS.setItem("products", []);
 }
 
-actionAddItemButton.addEventListener("click", () => {
-    const name = itemName.value;
-    const item = itemPrice.value;
-    const count = itemCount.value;
+const options = {
+    valueNames: ["name"]
+};
 
-    if (name && item && count) {
-        LS.pushToItem("items", [IDGEN.gen(), name, item, count, 0, 0, 0]);
-        ItemAddModal.hide();
+let userList;
     } else {
         Swal.fire({
             icon: "error",
