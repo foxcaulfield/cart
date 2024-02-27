@@ -21,51 +21,55 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-12 col-xxl-5">
-                <div class="items_box" id="items">
-                    <div class="menu">
-                        <input type="text" name="search" id="search" placeholder="Search...">
-                        <button type="button" class="add btn btn-success" data-bs-toggle="modal"
-                            data-bs-target="#addItemModal">&#10010;</button>
-                    </div>
-                    <div class="table-responsible">
-                        <table class="items table mb-3" id="table1">
-                            <thead>
-                                <tr class="table-primary align-middle">
-                                    <th data-type="number">No.</th>
-                                    <th data-type="string">Name</th>
-                                    <th data-type="number">Price</th>
-                                    <th data-type="number">Count</th>
-                                    <th></th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody></tbody>
-                        </table>
-                    </div>
+            <!-- store -->
+            <div id="store" class="col-xs-12 col-xxl-5">
+                <!-- header -->
+                <div id="searchWrapper" class="header-menu">
+                    <input type="text" class="search" name="search" id="storeSearch" placeholder="Search...">
+                    <button type="button" class="add btn btn-success" data-bs-toggle="modal"
+                        data-bs-target="#addProductModal">&#10010;</button>
+                </div>
+                <!-- table -->
+                <div id="storeProductsTableWrapper" class="table-responsible">
+                    <table id="storeProductsTable" class="store-products table mb-3">
+                        <thead>
+                            <tr class="table-primary align-middle">
+                                <th data-type="number">No.</th>
+                                <th data-type="string">Name</th>
+                                <th data-type="number">Price</th>
+                                <th data-type="number">Count</th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <!-- The class 'list' exists for List.js cases -->
+                        <tbody id="storeProductsList" class="list"></tbody>
+                    </table>
+
                 </div>
             </div>
-            <div class="col-xs12 col-xxl-7">
-                <div class="price_box">
-                    <div class="menu">
-                        <div class="price_title">Total: <span class="price_result">0</span></div>
-                    </div>
-                    <div class="table-responsible">
-                        <table class="price table mb-3" id="table2">
-                            <thead>
-                                <tr class="table-primary align-middle">
-                                    <th data-type="number">No.</th>
-                                    <th data-type="string">Name</th>
-                                    <th data-type="number">Price</th>
-                                    <th data-type="number">Count</th>
-                                    <th data-type="number">Discount, %</th>
-                                    <th data-type="number">Total</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody class="cart"></tbody>
-                        </table>
-                    </div>
+            <!-- cart -->
+            <div id="cart" class="col-xs12 col-xxl-7">
+                <!-- header -->
+                <div id="cartTotalPriceWrapper" class="header-menu">
+                    <div id="cartTotalPriceTitle">Total: <span id="cartTotalPriceValue">0</span></div>
+                </div>
+                <!-- table -->
+                <div id="cartProductsTableWrapper" class="table-responsible">
+                    <table id="cartProductsTable" class="price table mb-3">
+                        <thead>
+                            <tr class="table-primary align-middle">
+                                <th data-type="number">No.</th>
+                                <th data-type="string">Name</th>
+                                <th data-type="number">Price</th>
+                                <th data-type="number">Count</th>
+                                <th data-type="number">Discount, %</th>
+                                <th data-type="number">Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="cartProductsList"></tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -74,24 +78,24 @@
 
 
     <!-- Modal Body -->
-    <div class="modal fade" id="addItemModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
-        role="dialog" aria-labelledby="addItemModalTitle" aria-hidden="true">
+    <div class="modal fade" id="addProductModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false"
+        role="dialog" aria-labelledby="addProductModalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addItemModalTitle">
-                        Add item
+                    <h5 class="modal-title" id="addProductModalTitle">
+                        Add product
                     </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <label for="itemName" class="form-label">Item name</label>
-                    <input type="text" class="form-control mb-3" id="itemName" maxlength="40">
-                    <label for="itemPrice" class="form-label">Item price</label>
-                    <input type="number" class="form-control mb-3" id="itemPrice">
-                    <label for="itemCount" class="form-label">Item count</label>
-                    <input type="number" class="form-control mb-3" id="itemCount" min="1" value="1">
-                    <button type="submit" class="btn btn-success" id="actionAddItemButton">Add</button>
+                    <label for="productName" class="form-label">Product name</label>
+                    <input type="text" class="form-control mb-3" id="productName" maxlength="40">
+                    <label for="productPrice" class="form-label">Product price</label>
+                    <input type="number" class="form-control mb-3" id="productPrice">
+                    <label for="productCount" class="form-label">Product count</label>
+                    <input type="number" class="form-control mb-3" id="productCount" min="1" value="1">
+                    <button type="submit" class="btn btn-success" id="actionAddProductButton">Add</button>
                 </div>
             </div>
         </div>
