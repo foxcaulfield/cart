@@ -2,13 +2,18 @@ import { LocalStorageHelper } from "./LocalStorageHelper.js";
 import { IdGen } from "./IdGen.js";
 
 // General elements
-const modalElement = document.getElementById("addItemModal");
-const actionAddItemButton = document.getElementById("actionAddItemButton");
+const modalElement = document.getElementById("addProductModal");
+const actionAddProductButton = document.getElementById("actionAddProductButton");
+const storeProductsList = document.getElementById("storeProductsList");
+const cartProductsList = document.getElementById("cartProductsList");
+const storeProductsTable = document.getElementById("storeProductsTable");
+const cartProductsTable = document.getElementById("cartProductsTable");
+const cartTotalPriceValue = document.getElementById("cartTotalPriceValue");
 
 // Modal fields
-const itemName = document.getElementById("itemName");
-const itemPrice = document.getElementById("itemPrice");
-const itemCount = document.getElementById("itemCount");
+const productName = document.getElementById("productName");
+const productPrice = document.getElementById("productPrice");
+const productCount = document.getElementById("productCount");
 
 // Instances
 const IDGEN = new IdGen();
