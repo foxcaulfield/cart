@@ -32,6 +32,25 @@ const options = {
 };
 
 let userList;
+
+actionAddProductButton.addEventListener("click", () => {
+    const name = productName.value;
+    const price = productPrice.value;
+    const count = productCount.value;
+
+    if (name && price && count) {
+        // LS.pushToItem("products", [IDGEN.gen(), name, product, count, 0, 0, 0]);
+        LS.pushToItem("products", {
+            id: IDGEN.gen(),
+            name: name,
+            price: price,
+            productsInStoreCount: count,
+            productsInCartCount: 0,
+            discountPercentage: 0,
+            priceWithDiscount: 0
+        });
+        updateState();
+        ProductAddModal.hide();
     } else {
         Swal.fire({
             icon: "error",
@@ -40,6 +59,75 @@ let userList;
         })
     }
 });
+
+updateState();
+
+// Listeners
+storeProductsList.addEventListener("click", (event) => { 
+    console.log(event.target);
+    console.log(event.currentTarget);
+
+    // if (!event.currentTarget.dataset.productId) {
+    if (event.target.classList.contains("product-delete-button")) {
+
+        Swal.fire({
+            title: "Attention!",
+            text: "Do you really want to delete the product?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#dd3333",
+            confirmButtonText: "Confirm",
+            cancelButtonText: "Cancel",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                let products = JSON.parse(localStorage.getItem("products"));
+                for (let i = 0; i < products.length; ++i) { // Hello from C++
+                    if (products[i].id === event.target.dataset.productId) {
+                        products.splice(i, 1);
+                        localStorage.setItem("products", JSON.stringify(products));
+                        updateState();
+                    }
+                }
+                Swal.fire({
+                    title: "Success!",
+                    text: "The product was successfully deleted",
+                    icon: "success"
+                })
+            }
+        })
+    } else if (event.target.classList.contains("product-add-to-cart-button")) {
+        let products = JSON.parse(localStorage.getItem("products"));
+        console.log("sf", products);
+        for (let i = 0; i < products.length; ++i) { // Hello from C++
+            if (Number(products[i].productsInStoreCount) > 0 && products[i].id === event.target.dataset.productId) {
+                console.log("tut");
+                products[i].productsInStoreCount = products[i].productsInStoreCount - 1;
+                products[i].productsInCartCount = products[i].productsInCartCount + 1;
+                localStorage.setItem("products", JSON.stringify(products));
+                updateState();
+            }
+        }
+    }
+});
+
+cartProductsTable.addEventListener("click", (event) => {
+    if (event.target.classList.contains("product-cancel-button")) {
+        let products = JSON.parse(localStorage.getItem("products"));
+        console.log("sf", products);
+        for (let i = 0; i < products.length; ++i) { // Hello from C++
+            if (Number(products[i].productsInCartCount) > 0 && products[i].id === event.target.dataset.productId) {
+                console.log("tut");
+                products[i].productsInStoreCount = products[i].productsInStoreCount + 1;
+                products[i].productsInCartCount = products[i].productsInCartCount - 1;
+                localStorage.setItem("products", JSON.stringify(products));
+                updateState();
+            }
+        }
+    }
+});
+
+// Function definitions
 function updateState() {
     let resultPrice = 0;
     removeChildren(storeProductsList);
