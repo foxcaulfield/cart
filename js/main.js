@@ -39,7 +39,6 @@ actionAddProductButton.addEventListener("click", () => {
     const count = productCount.value;
 
     if (name && price && count) {
-        // LS.pushToItem("products", [IDGEN.gen(), name, product, count, 0, 0, 0]);
         LS.pushToItem("products", {
             id: IDGEN.gen(),
             name: name,
@@ -64,10 +63,6 @@ updateState();
 
 // Listeners
 storeProductsList.addEventListener("click", (event) => { 
-    console.log(event.target);
-    console.log(event.currentTarget);
-
-    // if (!event.currentTarget.dataset.productId) {
     if (event.target.classList.contains("product-delete-button")) {
 
         Swal.fire({
@@ -81,11 +76,11 @@ storeProductsList.addEventListener("click", (event) => {
             cancelButtonText: "Cancel",
         }).then((result) => {
             if (result.isConfirmed) {
-                let products = JSON.parse(localStorage.getItem("products"));
+                let products = LS.getItem("products");
                 for (let i = 0; i < products.length; ++i) { // Hello from C++
                     if (products[i].id === event.target.dataset.productId) {
                         products.splice(i, 1);
-                        localStorage.setItem("products", JSON.stringify(products));
+                        LS.setItem("products", products);
                         updateState();
                     }
                 }
@@ -97,14 +92,12 @@ storeProductsList.addEventListener("click", (event) => {
             }
         })
     } else if (event.target.classList.contains("product-add-to-cart-button")) {
-        let products = JSON.parse(localStorage.getItem("products"));
-        console.log("sf", products);
+        let products = LS.getItem("products");
         for (let i = 0; i < products.length; ++i) { // Hello from C++
             if (Number(products[i].productsInStoreCount) > 0 && products[i].id === event.target.dataset.productId) {
-                console.log("tut");
                 products[i].productsInStoreCount = products[i].productsInStoreCount - 1;
                 products[i].productsInCartCount = products[i].productsInCartCount + 1;
-                localStorage.setItem("products", JSON.stringify(products));
+                LS.setItem("products", products);
                 updateState();
             }
         }
@@ -114,13 +107,11 @@ storeProductsList.addEventListener("click", (event) => {
 cartProductsTable.addEventListener("click", (event) => {
     if (event.target.classList.contains("product-cancel-button")) {
         let products = JSON.parse(localStorage.getItem("products"));
-        console.log("sf", products);
         for (let i = 0; i < products.length; ++i) { // Hello from C++
             if (Number(products[i].productsInCartCount) > 0 && products[i].id === event.target.dataset.productId) {
-                console.log("tut");
                 products[i].productsInStoreCount = products[i].productsInStoreCount + 1;
                 products[i].productsInCartCount = products[i].productsInCartCount - 1;
-                localStorage.setItem("products", JSON.stringify(products));
+                LS.setItem("products", products);
                 updateState();
             }
         }
