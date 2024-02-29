@@ -1,8 +1,9 @@
-import { LocalStorageHelper } from "./LocalStorageHelper.js";
-import { IdGen } from "./IdGen.js";
+import { LocalStorageHelper } from "./LocalStorageHelper";
+import { IdGen } from "./IdGen";
 import { Modal } from "bootstrap";
 import Swal from "sweetalert2";
 import List from "list.js";
+import "./../style/general.scss";
 
 // General elements
 const modalElement = document.getElementById("addProductModal");
@@ -54,7 +55,7 @@ actionAddProductButton!.addEventListener("click", async () => {
 		await Swal.fire({
 			icon: "error",
 			title: "Error!",
-			text: "Fill all the fields"
+			text: "Fill all the fields!"
 		});
 	}
 });
