@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && cp src/index.html dist/index.html && cp src/css/** dist/css/** && cp src/favicon.ico dist/favicon.ico",
+    "build": "tsc && cp src/index.html dist/index.html && cp -a src/css/. dist/css && cp src/favicon.ico dist/favicon.ico",
     "prettier-format": "prettier --config .prettierrc 'src/**/*.ts' --write",
     "lint": "eslint . --ext .ts",
     "lint-and-fix": "eslint . --ext .ts --fix",
