@@ -28,7 +28,32 @@ const ProductAddModal = new Modal(modalElement!, {
 
 // Local storage init
 if (!LS.hasItem("products")) {
-	LS.setItem("products", []);
+	LS.setItem("products", [
+		{
+			id: IDGEN.gen(),
+			name: "Wood",
+			price: 125.55,
+			productsInStoreCount: 100,
+			productsInCartCount: 0,
+			totalPrice: 0
+		},
+		{
+			id: IDGEN.gen(),
+			name: "Water",
+			price: 50.75,
+			productsInStoreCount: 10,
+			productsInCartCount: 0,
+			totalPrice: 0
+		},
+		{
+			id: IDGEN.gen(),
+			name: "Rock",
+			price: 1,
+			productsInStoreCount: 42,
+			productsInCartCount: 0,
+			totalPrice: 0
+		}
+	]);
 }
 
 updateState();
@@ -205,7 +230,7 @@ function updateState() {
 
 				// Product price
 				const tdProductPrice = document.createElement("td");
-				tdProductPrice.innerHTML = `$${String(price)}`;
+				tdProductPrice.innerHTML = `$${String(price.toFixed(2))}`;
 
 				// Product in cart count
 				const tdProductCount = document.createElement("td");
@@ -213,7 +238,7 @@ function updateState() {
 
 				// Product total price
 				const tdProductTotalPrice = document.createElement("td");
-				tdProductTotalPrice.innerHTML = `${String(products[i].totalPrice)}`;
+				tdProductTotalPrice.innerHTML = `${String(products[i].totalPrice.toFixed(2))}`;
 
 				// Button "Delete product"
 				const tdProductDeleteButton = document.createElement("td");
@@ -240,7 +265,7 @@ function updateState() {
 		storeProductsTable!.hidden = true;
 		cartProductsTable!.hidden = true;
 	}
-	cartTotalPriceValue!.innerHTML = `$${String(resultPrice)}`;
+	cartTotalPriceValue!.innerHTML = `$${String(resultPrice.toFixed(2))}`;
 }
 
 function removeChildren(element: HTMLElement) {
