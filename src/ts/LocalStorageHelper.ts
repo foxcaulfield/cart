@@ -1,24 +1,33 @@
 export class LocalStorageHelper {
-    constructor() {
-        // console.log("LS created!");
-    }
+	constructor() {
+		// console.log("LS created!");
+	}
 
-    setItem(code, value) {
-        localStorage.setItem(code, JSON.stringify(value));
-    }
+	setItem(code: string, value: Array<Product>): void {
+		localStorage.setItem(code, JSON.stringify(value));
+	}
 
-    hasItem(code) {
-        return localStorage.getItem(code) !== null;
-    }
+	hasItem(code: string): boolean {
+		return localStorage.getItem(code) !== null;
+	}
 
-    pushToItem(code, value) {
-        const item = JSON.parse(localStorage.getItem(code) || []);
-        item.push(value);
-        localStorage.setItem(code, JSON.stringify(item));
-    }
+	pushToItem(code: string, value: Product): void {
+		const storageRawValue = localStorage.getItem(code);
+		if (!storageRawValue) {
+			throw new Error("Item is not exist");
+		}
+		const item = JSON.parse(storageRawValue);
+		item.push(value);
+		localStorage.setItem(code, JSON.stringify(item));
+	}
 
-    getItem(code) {
-        return JSON.parse(localStorage.getItem(code));
-    }
+	getItem(code: string): Array<Product> | null {
+		const storageRawValue = localStorage.getItem(code);
+
+		if (!storageRawValue) {
+			return null;
+		}
+
+		return JSON.parse(storageRawValue);
+	}
 }
-
