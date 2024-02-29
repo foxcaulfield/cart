@@ -14,7 +14,7 @@
     "build": "webpack",
     "serve": "webpack serve --open",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "author": "",
   "license": "ISC",
