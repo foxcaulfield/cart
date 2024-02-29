@@ -1,6 +1,11 @@
 // @import "custom";
 @import "bootstrap/scss/bootstrap";
 
+$color1: #f8b400;
+$color2: #faf5e4;
+$color3: #2c786c;
+$color4: #004445;
+
 * {
 	font-family: "Calibri", sans-serif;
 	font-size: 16px;
@@ -8,12 +13,14 @@
 
 body {
 	padding-top: 30px;
+	// background-color: $color2;
 }
 
 .container {
-	background-color: #fff;
-	box-shadow: 0px 0px 9px -2px rgba(0, 0, 0, 0.3);
+	background-color: $color2;
+	box-shadow: 0px 0px 14px -2px rgba(0, 0, 0, 0.3);
 	border-radius: 10px;
+	padding: 20px;
 }
 
 .header-menu {
@@ -21,7 +28,7 @@ body {
 	height: 50px;
 	justify-content: center;
 	align-items: center;
-	margin-top: 15px;
+	// margin-top: 15px;
 	margin-bottom: 15px;
 }
 
@@ -48,17 +55,24 @@ input#storeSearch {
 }
 
 /* add product modal */
-button.add {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border: none;
-	border-radius: 5px;
-	box-shadow: 0px 0px 9px -2px rgba(0, 0, 0, 0.3);
-	width: 40px;
-	height: 40px;
-	font-style: 20px;
-	cursor: pointer;
+button {
+	// &.product-add-to-cart-button {
+	// 	background: #f8b400 !important;
+	// }
+
+	&.add {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border: none;
+		border-radius: 5px;
+		box-shadow: 0px 0px 9px -2px rgba(0, 0, 0, 0.3);
+		width: 40px;
+		height: 40px;
+		font-style: 20px;
+		cursor: pointer;
+		background: $color3;
+	}
 }
 
 /* .product, */
@@ -82,4 +96,16 @@ tr {
 td {
 	padding: 15px;
 	text-align: center;
+}
+
+#store {
+	th {
+		background-color: $color1 !important;
+	}
+}
+
+#cart {
+	th {
+		background-color: $color3 !important;
+	}
 }

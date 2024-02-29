@@ -172,7 +172,7 @@ function updateState() {
 			// Button "Add product to the cart"
 			const tdProductAddToCartButton = document.createElement("td");
 			const buttonProductAddToCart = document.createElement("button");
-			buttonProductAddToCart.classList.add("product-add-to-cart-button", "btn", "btn-primary");
+			buttonProductAddToCart.classList.add("product-add-to-cart-button", "btn", "btn-light");
 			buttonProductAddToCart.dataset.productId = id;
 			buttonProductAddToCart.innerHTML = "&#10149;";
 			tdProductAddToCartButton.append(buttonProductAddToCart);
