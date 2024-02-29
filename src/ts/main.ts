@@ -155,7 +155,7 @@ function updateState() {
 
 			// Product price
 			const tdProductPrice = document.createElement("td");
-			tdProductPrice.innerHTML = String(price);
+			tdProductPrice.innerHTML = `$${String(price)}`;
 
 			// Products is store count
 			const tdProductCount = document.createElement("td");
@@ -205,7 +205,7 @@ function updateState() {
 
 				// Product price
 				const tdProductPrice = document.createElement("td");
-				tdProductPrice.innerHTML = String(price);
+				tdProductPrice.innerHTML = `$${String(price)}`;
 
 				// Product in cart count
 				const tdProductCount = document.createElement("td");
@@ -213,7 +213,7 @@ function updateState() {
 
 				// Product total price
 				const tdProductTotalPrice = document.createElement("td");
-				tdProductTotalPrice.innerHTML = String(products[i].totalPrice);
+				tdProductTotalPrice.innerHTML = `${String(products[i].totalPrice)}`;
 
 				// Button "Delete product"
 				const tdProductDeleteButton = document.createElement("td");
@@ -240,7 +240,7 @@ function updateState() {
 		storeProductsTable!.hidden = true;
 		cartProductsTable!.hidden = true;
 	}
-	cartTotalPriceValue!.innerHTML = String(resultPrice);
+	cartTotalPriceValue!.innerHTML = `$${String(resultPrice)}`;
 }
 
 function removeChildren(element: HTMLElement) {
